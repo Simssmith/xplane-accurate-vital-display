@@ -1,6 +1,7 @@
 -- Author: Sims Smith https://www.youtube.com/channel/UCIdStqXIqKFNO__DAa_lj2g
 -- Version 0.1
 -- Date: 2017-11-15
+-- Source repo https://github.com/Simssmith/xplane-accurate-vital-display
 
 -- This script is provided under friendly MIT License Copyright 2017 Sims Smith
 -- Read MIT License https://opensource.org/licenses/MIT
