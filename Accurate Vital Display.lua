@@ -167,7 +167,7 @@ function avd_on_close(avd_wnd)
 end
 
 -- width, height, decoration style as per XPLMCreateWindowEx. 1 for solid background, 3 for transparent
-avd_wnd = float_wnd_create(200, 240, 1)
+avd_wnd = float_wnd_create(200, 240, 1, false)
 float_wnd_set_title(avd_wnd, "Accurate Vital Display")
 float_wnd_set_ondraw(avd_wnd, "avd_on_draw")
 float_wnd_set_onclick(avd_wnd, "avd_on_click")
