@@ -30,35 +30,27 @@ local label_y   = 150
 local label_y_inc = 50
 local vital_inc = 100
 
-function AVD_Toggle()
-	if show_AVD == true then
-		show_AVD = false
-	else
-		show_AVD = true
-	end
-end
-
 function print_Vital()
 	-- color (defined by it's RGB values)
-	glColor3f(1,1,1)
-	draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 4), "HDG")
-	ez_xp_psi = string.format("%03.0f",xp_psi);
-	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 4), ez_xp_psi)
+	--glColor3f(1,1,1)
+	--draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 4), "HDG")
+--	ez_xp_psi = string.format("%03.0f",xp_psi);
+--	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 4), ez_xp_psi)
 
-	draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 2), "ALT")
-	ez_xp_elevation = string.format("%05.0f",xp_elevation * 3.28084)
-	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 2), ez_xp_elevation)
+--	draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 2), "ALT")
+--	ez_xp_elevation = string.format("%05.0f",xp_elevation * 3.28084)
+--	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 2), ez_xp_elevation)
 
-	draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 3), "SPD")
-	ez_xp_indicated_airspeed = string.format("%03.0f",xp_indicated_airspeed);
-	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 3), ez_xp_indicated_airspeed)
+--	draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 3), "SPD")
+--	ez_xp_indicated_airspeed = string.format("%03.0f",xp_indicated_airspeed);
+--	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 3), ez_xp_indicated_airspeed)
 	
-	draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 1), "VVI")
-	ez_xp_vh_ind_fpm2 = string.format("%03.0f",xp_vh_ind_fpm2);
-	if ez_xp_vh_ind_fpm2 == "-0" then
-		ez_xp_vh_ind_fpm2 = "0";
-	end
-	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 1), ez_xp_vh_ind_fpm2)
+--	draw_string_Times_Roman_24(left_x, label_y + (label_y_inc * 1), "VVI")
+--	ez_xp_vh_ind_fpm2 = string.format("%03.0f",xp_vh_ind_fpm2);
+--	if ez_xp_vh_ind_fpm2 == "-0" then
+		--ez_xp_vh_ind_fpm2 = "0";
+--	end
+--	draw_string_Times_Roman_24(left_x + vital_inc, label_y + (label_y_inc * 1), ez_xp_vh_ind_fpm2)
 
 end
 
@@ -86,22 +78,8 @@ function avd_on_draw(avd_wnd, avd_x, avd_y)
 
 end
 
-function toogle_display()
-	--Mouse is over "Show/Hide" Text
-	if (MOUSE_X > left_x and MOUSE_X < left_x + x_inc) then
-		if (MOUSE_Y > top_y and MOUSE_Y < top_y + y_inc) then
-			AVD_Toggle()
-		end
-	end
-end
-
 function vital_refresh()
-	if show_AVD == true then
-		print_Vital()
-	else
-		--do nothing empty screen
-	end
-
+	--print_Vital()
 end
 
 -- x and y are relative from the origin of the window, i.e. the lower left
@@ -117,12 +95,11 @@ end
 
 -- width, height, decoration style as per XPLMCreateWindowEx. 1 for solid background, 3 for transparent
 avd_wnd = float_wnd_create(200, 240, 1, false)
-float_wnd_set_title(avd_wnd, "Accurate Vital Display")
+float_wnd_set_title(avd_wnd, "AVD")
 float_wnd_set_ondraw(avd_wnd, "avd_on_draw")
 float_wnd_set_onclick(avd_wnd, "avd_on_click")
 float_wnd_set_onclose(avd_wnd, "avd_on_close")
 
-do_on_mouse_click("toogle_display()")
 do_every_draw("vital_refresh()")
 
 
