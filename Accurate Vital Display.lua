@@ -84,56 +84,6 @@ function avd_on_draw(avd_wnd, avd_x, avd_y)
 	end
 	draw_string_Times_Roman_24(avd_x + vital_inc, avd_y + (label_y_inc * 1), ez_xp_vh_ind_fpm2)
 
-        graphics.set_color(1, 1, 1, 1)
-	graphics.set_width(2)
-
-	graphics.draw_line(avd_x, avd_y, avd_x + x_inc, avd_y)
-	graphics.draw_line(avd_x, avd_y + y_inc, avd_x + x_inc, avd_y + y_inc)
-
-	graphics.draw_line(avd_x, avd_y, avd_x, avd_y + y_inc)
-	graphics.draw_line(avd_x + x_inc, avd_y, avd_x + x_inc, avd_y + y_inc)
-
-        -- Trying to get the toggle button to work but not yet.
-        if (avd_lastClickX > avd_x and avd_lastClickX < avd_x + x_inc) then
-		if (avd_lastClickY > avd_y and avd_lastClickY < avd_y + y_inc) then
-			AVD_Toggle()
-		end
-	end
-
-	if (show_AVD == true) then
-		glColor3f(1,1,1)
-		draw_string_Times_Roman_24(avd_x + 5, avd_y + 4, "HIDE")
-		glColor3f(0,0,0)
-		draw_string_Times_Roman_24(avd_x + 7, avd_y + 6, "HIDE")
-	else	
-		glColor3f(0,0,0)
-		draw_string_Times_Roman_24(avd_x + 1, avd_y + 2, "SHOW")
-		glColor3f(255,128,0)
-		draw_string_Times_Roman_24(avd_x + 3, avd_y + 4, "SHOW")
-	end
-end
-
-function display_action_button()
-	graphics.set_color(1, 1, 1, 1)
-	graphics.set_width(2)
-
-	graphics.draw_line(left_x, top_y, left_x + x_inc, top_y)
-	graphics.draw_line(left_x, top_y + y_inc, left_x + x_inc, top_y + y_inc)
-
-	graphics.draw_line(left_x, top_y, left_x, top_y + y_inc)
-	graphics.draw_line(left_x + x_inc, top_y, left_x + x_inc, top_y + y_inc)
-
-	if (show_AVD == true) then
-		glColor3f(1,1,1)
-		draw_string_Times_Roman_24(left_x+5, label_y, "HIDE")
-		glColor3f(0,0,0)
-		draw_string_Times_Roman_24(left_x+7, label_y + 2, "HIDE")
-	else	
-		glColor3f(0,0,0)
-		draw_string_Times_Roman_24(left_x+1, label_y - 2, "SHOW")
-		glColor3f(255,128,0)
-		draw_string_Times_Roman_24(left_x+3, label_y, "SHOW")
-	end
 end
 
 function toogle_display()
@@ -152,7 +102,6 @@ function vital_refresh()
 		--do nothing empty screen
 	end
 
-	display_action_button()
 end
 
 -- x and y are relative from the origin of the window, i.e. the lower left
