@@ -16,6 +16,7 @@ dataref("xp_psi", "sim/flightmodel/position/psi")
 dataref("xp_elevation", "sim/flightmodel/position/elevation")
 dataref("xp_indicated_airspeed", "sim/flightmodel/position/indicated_airspeed")
 dataref("xp_vh_ind_fpm2", "sim/flightmodel/position/vh_ind_fpm2")
+dataref("xp_fps", "sim/operation/misc/frame_rate_period")
 
 avd_lastClickX = 640 / 2
 avd_lastClickY = 480 / 2
@@ -30,9 +31,33 @@ local label_y   = 150
 local label_y_inc = 50
 local vital_inc = 100
 
+local fps_refresh_internval = 3
+local fps_display = 0
+local fps_sum = 0
+local fps_iter = 0
+
 function avd_on_draw(avd_wnd, avd_x, avd_y)
 	-- color (defined by it's RGB values)
 	glColor3f(1,1,1)
+    fps_sum = fps_sum + string.format("%03.0f",1 / xp_fps)
+	fps_iter = fps_iter +  1
+	
+	--Only refresh every nth  sec
+    current_mod = os.time() % fps_refresh_internval
+	if current_mod == 0 and do_display == 1 then
+	    fps_display = fps_sum / fps_iter	
+		fps_display = string.format("%03.0f",fps_display)
+		fps_sum = 0
+		fps_iter = 0
+		do_display = 0
+    end
+	
+	if current_mod ~= 0 then 
+		do_display = 1
+	end
+	draw_string_Times_Roman_24(avd_x, avd_y + (label_y_inc * .25), "FPS")
+	draw_string_Times_Roman_24(avd_x + vital_inc, avd_y + (label_y_inc * .25), fps_display)
+
 	draw_string_Times_Roman_24(avd_x, avd_y + (label_y_inc * 4), "HDG")
 	ez_xp_psi = string.format("%03.0f",xp_psi);
 	draw_string_Times_Roman_24(avd_x + vital_inc, avd_y + (label_y_inc * 4), ez_xp_psi)
